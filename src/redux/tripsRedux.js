@@ -28,27 +28,23 @@ export const getFilteredTrips = ({trips, filters}) => {
     const pattern = new RegExp(filters.cost, 'i');
     output = output.filter(trip => pattern.test(trip.name));
     // most expensive first
-    // output.sort(function(a, b){return b - a}); ???????
+    // DRAMA
   }
 
   return output;
 };
 
 export const getTripById = ({trips}, tripId) => {
-  const filtered = trips;
-
+  // tu orginalnie bylo > const filtered = trips; < ale boje sie zmienic const na let, a poza tym toooo jakies maslo maslane mi wychodzi
+  const filtered = trips.filter(trip => trip.id == tripId); // :O dziala! bo miszczu podpowiedzial
   // TODO - filter trips by tripId
-  filtered.filter(trip => trip.trip.id == tripId); // filtered.filter?? DRAMA
 
   console.log('filtering trips by tripId:', tripId, filtered);
   return filtered.length ? filtered[0] : {error: true};
 };
 
 export const getTripsForCountry = ({trips}, countryCode) => {
-  const filtered = trips;
-  
-  // TODO - filter trips by countryCode
-  filtered.filter(trip => trip.country.code == countryCode); // DRAMA 2
+  const filtered = trips.filter(trip => trip.country.code == countryCode);
  
   console.log('filtering trips by countryCode:', countryCode, filtered);
   return filtered.length ? filtered : [{error: true}];
