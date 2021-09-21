@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../common/Icon/Icon.js';
 import {formatPrice} from '../../../utils/formatPrice.js';
 
-const OrderOptionIcons = ({values, required, setOptionValue}) => (
+const OrderOptionIcons = ({values, required, setOptionValue, currentValue}) => (
   <div className={styles.component}>
     {required ? false : (
       <div
@@ -17,7 +17,7 @@ const OrderOptionIcons = ({values, required, setOptionValue}) => (
     )}
     {values.map(value => (
       <div
-        className={styles.icon} //styles.iconActive nie wiem jak zrobic "tylko jesli dany element powinien byc aktywny"
+        className={currentValue == value.id ? styles.iconActive : styles.icon}
         key={value.id}
         onClick={value => setOptionValue(value.id)}
       >
@@ -32,6 +32,7 @@ OrderOptionIcons.propTypes = {
   values: PropTypes.array,
   required: PropTypes.bool,
   setOptionValue: PropTypes.func,
+  currentValue: PropTypes.string,
 };
 
 export default OrderOptionIcons;

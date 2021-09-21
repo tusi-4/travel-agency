@@ -3,7 +3,7 @@ import styles from './OrderOption.scss';
 import {formatPrice} from '../../../utils/formatPrice.js';
 import PropTypes from 'prop-types';
 
-const OrderOptionNumber = (currentValue, limits, setOptionValue, price) => (
+const OrderOptionNumber = ({currentValue, limits, setOptionValue, price}) => (
   <div className={styles.number}>
     <input
       className={styles.inputSmall}
@@ -18,7 +18,7 @@ const OrderOptionNumber = (currentValue, limits, setOptionValue, price) => (
 );
 
 OrderOptionNumber.propTypes = {
-  currentValue: PropTypes.number,
+  currentValue: PropTypes.node,
   limits: PropTypes.object,
   setOptionValue: PropTypes.func,
   price: PropTypes.string,
