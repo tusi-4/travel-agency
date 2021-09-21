@@ -35,7 +35,6 @@ export default function reducer(statePart = [], action = {}) {
         searchPhrase: action.payload,
       };
       // TODO - handle other action types
-    // kombinacje z poniedzialku UZUPELNIC - 10 linii
     case CHANGE_DURATION:
       return {
         ...statePart,
