@@ -15,15 +15,28 @@ describe('Component TripSummary', () => {
     const expectedSrc = 'image.jpg';
     const expectedAlt = 'Lorem';
     const image = shallow(<TripSummary image={expectedSrc} name={expectedAlt} />);
-    expect(image.find('.image').prop('src', 'alt')).toEqual(expectedSrc, expectedAlt);
+    expect(image.find('img').prop('src', 'alt')).toEqual(expectedSrc, expectedAlt);
   });
 
   it('should render props correctly', () => {
-    const component = shallow(<TripSummary name='Drama' cost='Ramad' days='Amadr' />);
+    const component = shallow(<TripSummary name='Drama' cost='Ramad' days={123} />);
     expect(component).toBeTruthy();
   });
 
   it('should throw error when a prop is missing', () => {
     expect(() => shallow(<TripSummary />)).toThrow();
+  });
+
+  it('should contain a tags array', () => {
+    const component = shallow(<TripSummary tags={['ene', 'due', 'rike']} />);
+    expect(component.find('.tag').at(0)).toEqual('ene');
+    expect(component.find('.tag').at(1)).toEqual('due');
+    expect(component.find('.tag').at(2)).toEqual('rike');
+
+    console.log(component.debug());
+  });
+
+  it('should not render tags div', () => {
+
   });
 });
