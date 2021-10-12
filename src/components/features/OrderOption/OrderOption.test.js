@@ -1,6 +1,7 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import OrderOption from './OrderOption';
+import DatePicker from 'react-datepicker';
 
 describe('Component OrderOption', () => {
   it('should render', () => {
@@ -17,7 +18,7 @@ describe('Component OrderOption', () => {
 
   it('should render correct title', () => {
     const expectedTitle = 'Lorem';
-    const component = shallow(<OrderOption name={expectedTitle} type={'text'} />); // czemu text
+    const component = shallow(<OrderOption name={expectedTitle} type={'dropdown'} />);
 
     const renderedTitle = component.find('.title').text();
     expect(renderedTitle).toEqual(expectedTitle);
@@ -92,7 +93,6 @@ for(let type in optionTypes){
     /* type-specific tests */
     switch (type) {
       case 'dropdown': {
-        /* tests for dropdown */
         it('contains select and options', () => {
           const select = renderedSubcomponent.find('select');
           expect(select.length).toBe(1);
@@ -114,21 +114,25 @@ for(let type in optionTypes){
 
         break;
       }
-      // NICZEGO PONIŻEJ NIE CZAJĘ
+
       case 'icons': {
         it('should render divs with icon class', () => {
           const iconDiv = renderedSubcomponent.find('.icon');
-          expect(iconDiv.length).toBe(2); // czy tylko 2 działa, bo w komponencie siedzą 2 divy? nie wiem
+          expect(iconDiv.length).toBe(2);
+        });
 
-          // test przeszedł, nie mam pojęcia czy to wszytko
+        it('should render proper icon', () => {
+          const icon = renderedSubcomponent.find('Icon').not('[name="times-circle"]');
+          expect(icon.at(0).prop('name')).toEqual(mockProps.values[0].icon);
+          expect(icon.at(1).prop('name')).toEqual(mockProps.values[1].icon);
+          // działa, ale ja temu nie ufam
+
         });
 
         it('should run setOrderOption function on click', () => {
           renderedSubcomponent.find('.icon').last().simulate('click');
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); // dlaczego 1 raz? nie kumam tych linijek
-
-          //test przeszedł, nie wiem dlaczego
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue }); 
         });
 
         break;
@@ -138,25 +142,46 @@ for(let type in optionTypes){
         it('should render div and checkbox inputs', () => {
           const checkboxDiv = renderedSubcomponent.find('.checkboxes');
           const checkBoxInput = renderedSubcomponent.find('input');
-          expect(checkboxDiv).toBeTruthy();
-          expect(checkBoxInput).toBeTruthy();
+          expect(checkboxDiv.length).toBe(1);
+          expect(checkBoxInput.length).toBe(2);
         });
+
+        // nie mam pomysłu co tu jeszcze sprawdzić, idę do interakcji
+
+        it('should run setOrderOption function on  change', () => {
+          renderedSubcomponent.find(/* element, który ma atrybut 'value' o wartości takiej jak stała 'testValue', czyli mockProps.values[1].id, czyli 'xyz'... czyli który to element O_O */).simulate('change', {currentTarget: {checked: true}});
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({[mockProps.currentValue]: testValue});
+        });
+        // nie działa, idę do numbera
 
         break;
       }
 
       case 'number': {
-        it('contains div with input', () => {
+        it('should contain div with input', () => {
           const inputDiv = renderedSubcomponent.find('input');
           expect(inputDiv.length).toBe(1);
+        });
+
+        it('should have correct default input value', () => {
+          const defaultValue = renderedSubcomponent.find('input').prop('value');
+          expect(defaultValue).toEqual(mockPropsForType.number.currentValue); //jezus czemu to działa
+        });
+
+        //sprawdzam limitsy ? (czy to ma sens?)
+        it('should have min and max limits', () => {
+          const limitMin = renderedSubcomponent.find('input').prop('min');
+          const limitMax = renderedSubcomponent.find('input').prop('max');
+          expect(limitMin).toEqual(mockProps.limits.min);
+          expect(limitMax).toEqual(mockProps.limits.max);
+          // console.log(renderedSubcomponent.debug());
         });
 
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValueNumber}});
           expect(mockSetOrderOption).toBeCalledTimes(1);
           expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber });
-
-          //testy przeszły, nie wiem dlaczego
         });
 
         break;
@@ -165,7 +190,19 @@ for(let type in optionTypes){
       case 'text': {
         it('should render text input', () => {
           const textInput = renderedSubcomponent.find('input');
-          expect(textInput).toBeTruthy();
+          expect(textInput).toBeTruthy(); // czy tu może być .ToBeTruthy?
+        });
+        
+        it('should have correct default input value', () => {
+          const defValue = renderedSubcomponent.find('input').prop('value');
+          expect(defValue).toEqual(mockProps.currentValue);
+        });
+        // czy tu coś jeszcze sprawdzać? chyba nie, idę do interakcji
+
+        it('should run setOrderOption function on change', () => {
+          renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: testValue});
         });
 
         break;
@@ -173,8 +210,17 @@ for(let type in optionTypes){
 
       case 'date': {
         it('should render DatePicker', () => {
-          const picker = renderedSubcomponent.find('DatePicker');
-          expect(picker).toBeTruthy();
+          const picker = renderedSubcomponent.find(DatePicker);
+          expect(picker).toBeTruthy(); // again, czy .ToBeTruthy jest ok? .toBe(1) wywala błąd
+        });
+
+        // sprawdzam od razu interakcję, bo nie wiem co sprawdzić
+
+        it('should run setOrderOption function on change', () => {
+          /* "nie ma potrzeby go renderować, wystarzczy zasymulować", czyliiii ? */
+          const picker = renderedSubcomponent.find(DatePicker);
+          picker.simulate('change', testValue);
+          // to już nie miało prawa zadziałać, ale działa !!?
         });
 
         break;
