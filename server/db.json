@@ -1,0 +1,30 @@
+{
+  "orders": [
+    {
+      "car-rental": "",
+      "accommodation": "hotel",
+      "features": [],
+      "adults": 1,
+      "children": 0,
+      "name": "",
+      "contact": "",
+      "start-data": "",
+      "totalCost": "$51,381",
+      "id": 1
+    },
+    {
+      "car-rental": "suv",
+      "accommodation": "house",
+      "features": [
+        "security"
+      ],
+      "adults": "2",
+      "children": "3",
+      "name": "Ann",
+      "contact": "Patterson",
+      "start-data": "2021-10-31T23:00:00.000Z",
+      "totalCost": "$191,033",
+      "id": 2
+    }
+  ]
+}
