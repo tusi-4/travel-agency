@@ -125,8 +125,6 @@ for(let type in optionTypes){
           const icon = renderedSubcomponent.find('Icon').not('[name="times-circle"]');
           expect(icon.at(0).prop('name')).toEqual(mockProps.values[0].icon);
           expect(icon.at(1).prop('name')).toEqual(mockProps.values[1].icon);
-          // działa, ale ja temu nie ufam
-
         });
 
         it('should run setOrderOption function on click', () => {
@@ -146,14 +144,11 @@ for(let type in optionTypes){
           expect(checkBoxInput.length).toBe(2);
         });
 
-        // nie mam pomysłu co tu jeszcze sprawdzić, idę do interakcji
-
         it('should run setOrderOption function on  change', () => {
-          renderedSubcomponent.find(/* element, który ma atrybut 'value' o wartości takiej jak stała 'testValue', czyli mockProps.values[1].id, czyli 'xyz'... czyli który to element O_O */).simulate('change', {currentTarget: {checked: true}});
+          renderedSubcomponent.find('input[value=' + testValue + ']').simulate('change', {currentTarget: {checked: true}}); // nie parsuje się, czego nie widzę?
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({[mockProps.currentValue]: testValue});
+          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: {[mockProps.currentValue]: testValue}});
         });
-        // nie działa, idę do numbera
 
         break;
       }
@@ -166,16 +161,14 @@ for(let type in optionTypes){
 
         it('should have correct default input value', () => {
           const defaultValue = renderedSubcomponent.find('input').prop('value');
-          expect(defaultValue).toEqual(mockPropsForType.number.currentValue); //jezus czemu to działa
+          expect(defaultValue).toEqual(mockPropsForType.number.currentValue);
         });
 
-        //sprawdzam limitsy ? (czy to ma sens?)
         it('should have min and max limits', () => {
           const limitMin = renderedSubcomponent.find('input').prop('min');
           const limitMax = renderedSubcomponent.find('input').prop('max');
           expect(limitMin).toEqual(mockProps.limits.min);
           expect(limitMax).toEqual(mockProps.limits.max);
-          // console.log(renderedSubcomponent.debug());
         });
 
         it('should run setOrderOption function on change', () => {
@@ -190,14 +183,13 @@ for(let type in optionTypes){
       case 'text': {
         it('should render text input', () => {
           const textInput = renderedSubcomponent.find('input');
-          expect(textInput).toBeTruthy(); // czy tu może być .ToBeTruthy?
+          expect(textInput).toBeTruthy();
         });
         
         it('should have correct default input value', () => {
           const defValue = renderedSubcomponent.find('input').prop('value');
           expect(defValue).toEqual(mockProps.currentValue);
         });
-        // czy tu coś jeszcze sprawdzać? chyba nie, idę do interakcji
 
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
@@ -209,18 +201,14 @@ for(let type in optionTypes){
       }
 
       case 'date': {
+        /* nie ma potrzeby renderować, więc zakomentowuję should render
         it('should render DatePicker', () => {
           const picker = renderedSubcomponent.find(DatePicker);
-          expect(picker).toBeTruthy(); // again, czy .ToBeTruthy jest ok? .toBe(1) wywala błąd
+          expect(picker).toBeTruthy();
         });
-
-        // sprawdzam od razu interakcję, bo nie wiem co sprawdzić
-
+        */
         it('should run setOrderOption function on change', () => {
-          /* "nie ma potrzeby go renderować, wystarzczy zasymulować", czyliiii ? */
-          const picker = renderedSubcomponent.find(DatePicker);
-          picker.simulate('change', testValue);
-          // to już nie miało prawa zadziałać, ale działa !!?
+          renderedSubcomponent.find(DatePicker).simulate('change', testValue);
         });
 
         break;
