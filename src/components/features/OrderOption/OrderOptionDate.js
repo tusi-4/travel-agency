@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import PropTypes from 'prop-types';
 import styles from './OrderOption.scss';
 
-// klasa mnie wystraszyla i jednak strzalkuje. improwizacja level drama
 const OrderOptionDate = ({currentValue, setOptionValue}) => (
   <div className={styles.component}> 
     <DatePicker 

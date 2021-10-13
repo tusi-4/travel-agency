@@ -145,9 +145,9 @@ for(let type in optionTypes){
         });
 
         it('should run setOrderOption function on  change', () => {
-          renderedSubcomponent.find('input[value=' + testValue + ']').simulate('change', {currentTarget: {checked: true}}); // nie parsuje się, czego nie widzę?
+          renderedSubcomponent.find('input[value="' + testValue + '"]').simulate('change', {currentTarget: {checked: true}});
           expect(mockSetOrderOption).toBeCalledTimes(1);
-          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: {[mockProps.currentValue]: testValue}});
+          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: [mockProps.currentValue, testValue]});
         });
 
         break;
@@ -209,6 +209,8 @@ for(let type in optionTypes){
         */
         it('should run setOrderOption function on change', () => {
           renderedSubcomponent.find(DatePicker).simulate('change', testValue);
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({[mockProps.id]: testValue});
         });
 
         break;
