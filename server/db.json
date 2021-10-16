@@ -163,6 +163,55 @@
       "tripId": "5cc1d10130dfa407e2e54e20",
       "tripName": "Pleasant travel in cool Turkey",
       "id": 12
+    },
+    {
+      "car-rental": "full",
+      "accommodation": "hotel",
+      "features": [
+        "all-inclusive"
+      ],
+      "adults": "1",
+      "children": "1",
+      "name": "11",
+      "contact": "11",
+      "start-data": "2021-11-10T23:00:00.000Z",
+      "totalCost": "$77,521",
+      "tripId": "5cc1d10130dfa407e2e54e20",
+      "tripName": "Pleasant travel in cool Turkey",
+      "id": 13
+    },
+    {
+      "car-rental": "suv",
+      "accommodation": "suite",
+      "features": [
+        "kitchen"
+      ],
+      "adults": "2",
+      "children": "2",
+      "name": "22",
+      "contact": "22",
+      "start-data": "2021-11-21T23:00:00.000Z",
+      "totalCost": "$157,742",
+      "tripId": "5cc1d10130dfa407e2e54e20",
+      "tripName": "Pleasant travel in cool Turkey",
+      "id": 14
+    },
+    {
+      "car-rental": "luxury",
+      "accommodation": "house",
+      "features": [
+        "pool"
+      ],
+      "adults": "3",
+      "children": "3",
+      "name": "33",
+      "contact": "33",
+      "start-data": "2021-10-29T22:00:00.000Z",
+      "totalCost": "$241,563",
+      "tripId": "5cc1d10130dfa407e2e54e20",
+      "tripName": "Pleasant travel in cool Turkey",
+      "countryCode": "TUR",
+      "id": 15
     }
   ]
 }
