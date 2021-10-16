@@ -147,6 +147,22 @@
       "start-data": "2021-11-01T23:00:00.000Z",
       "totalCost": "$157,742",
       "id": 11
+    },
+    {
+      "car-rental": "luxury",
+      "accommodation": "house",
+      "features": [
+        "pool"
+      ],
+      "adults": "3",
+      "children": "3",
+      "name": "3",
+      "contact": "3",
+      "start-data": "2021-11-02T23:00:00.000Z",
+      "totalCost": "$241,563",
+      "tripId": "5cc1d10130dfa407e2e54e20",
+      "tripName": "Pleasant travel in cool Turkey",
+      "id": 12
     }
   ]
 }
