@@ -25,6 +25,20 @@
       "start-data": "2021-10-31T23:00:00.000Z",
       "totalCost": "$191,033",
       "id": 2
+    },
+    {
+      "car-rental": "full",
+      "accommodation": "suite",
+      "features": [
+        "all-inclusive"
+      ],
+      "adults": "2",
+      "children": "1",
+      "name": "",
+      "contact": "",
+      "start-data": "",
+      "totalCost": "$130,452",
+      "id": 3
     }
   ]
 }
