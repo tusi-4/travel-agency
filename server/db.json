@@ -39,6 +39,114 @@
       "start-data": "",
       "totalCost": "$130,452",
       "id": 3
+    },
+    {
+      "car-rental": "",
+      "accommodation": "hotel",
+      "features": [],
+      "adults": 1,
+      "children": 0,
+      "name": "",
+      "contact": "",
+      "start-data": "",
+      "totalCost": "$51,381",
+      "id": 4
+    },
+    {
+      "car-rental": "luxury",
+      "accommodation": "house",
+      "features": [
+        "pool"
+      ],
+      "adults": "2",
+      "children": "1",
+      "name": "Victor Hugo",
+      "contact": "",
+      "start-data": "2021-10-24T22:00:00.000Z",
+      "totalCost": "$134,202",
+      "id": 5
+    },
+    {
+      "car-rental": "",
+      "accommodation": "hotel",
+      "features": [],
+      "adults": 1,
+      "children": 0,
+      "name": "",
+      "contact": "",
+      "start-data": "",
+      "totalCost": "$51,381",
+      "id": 6
+    },
+    {
+      "car-rental": "",
+      "accommodation": "hotel",
+      "features": [],
+      "adults": 1,
+      "children": 0,
+      "name": "",
+      "contact": "",
+      "start-data": "",
+      "totalCost": "$51,381",
+      "id": 7
+    },
+    {
+      "car-rental": "full",
+      "accommodation": "suite",
+      "features": [
+        "all-inclusive",
+        "kitchen",
+        "pool"
+      ],
+      "adults": "8",
+      "children": "1",
+      "name": "Molly Bob",
+      "contact": "0982490809",
+      "start-data": "2021-10-25T22:00:00.000Z",
+      "totalCost": "$456,286",
+      "id": 8
+    },
+    {
+      "car-rental": "suv",
+      "accommodation": "house",
+      "features": [
+        "pool"
+      ],
+      "adults": "3",
+      "children": 0,
+      "name": "Jim Jimsky",
+      "contact": "jimjim@jim.com",
+      "start-data": "2021-10-28T22:00:00.000Z",
+      "totalCost": "$160,742",
+      "id": 9
+    },
+    {
+      "car-rental": "full",
+      "accommodation": "hotel",
+      "features": [
+        "all-inclusive"
+      ],
+      "adults": 1,
+      "children": "1",
+      "name": "1",
+      "contact": "1",
+      "start-data": "2021-10-31T23:00:00.000Z",
+      "totalCost": "$77,521",
+      "id": 10
+    },
+    {
+      "car-rental": "suv",
+      "accommodation": "suite",
+      "features": [
+        "kitchen"
+      ],
+      "adults": "2",
+      "children": "2",
+      "name": "2",
+      "contact": "2",
+      "start-data": "2021-11-01T23:00:00.000Z",
+      "totalCost": "$157,742",
+      "id": 11
     }
   ]
 }
