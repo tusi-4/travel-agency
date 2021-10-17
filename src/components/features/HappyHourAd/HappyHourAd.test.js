@@ -8,7 +8,7 @@ const select = {
 };
 
 const mockProps = {
-  title: 'Title',
+  title: 'title',
   promoDescription: 'description',
 };
 
@@ -27,7 +27,7 @@ describe('Component HappyHourAd', () => {
   it('should render correct title prop', () => {
     const component = shallow(<HappyHourAd {...mockProps} />);
     const expectedTitle = mockProps.title;
-    expect(expectedTitle).toEqual(component.find(select.title).prop('title'));
+    expect(expectedTitle).toEqual(component.find(select.title).text());
   });
 });
 
@@ -92,8 +92,15 @@ describe('Component HappyHourAd with mocked Date and delay', () => {
 });
 
 //test 6, którego oczywiście nie było - starsza pani ma omamy, problemy ze wzrokiem i przeprasza
-describe('Component HappyHourAd with mocked Date', () => {
+describe('Component HappyHourAd with mocked Date and promo info', () => {
   checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
   checkDescriptionAtTime('12:30:59', mockProps.promoDescription);
   checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
+});
+
+// test 7
+describe('Component HappyHourAd with mocked Date and delay and promo info', () => {
+  checkDescriptionAfterTime('11:57:58', 2, '120');
+  checkDescriptionAfterTime('12:12:12', 1, mockProps.promoDescription);
+  checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + ''); // nie wiem co tu porobić, a test przechodzi
 });
