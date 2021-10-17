@@ -9,7 +9,7 @@ const select = {
 
 const mockProps = {
   title: 'Title',
-  description: 'def',
+  promoDescription: 'description',
 };
 
 describe('Component HappyHourAd', () => {
@@ -49,7 +49,7 @@ const mockDate = customDate => class extends Date {
 
 const checkDescriptionAtTime = (time, expectedDescription) => {
   it(`should show correct at ${time}`, () => {
-    global.Date = mockDate(`2019-05-14T${time}.135Z`); // mam wrażnie, że czytałam o ``, z drugiej strony w OrderOption wąsate dolary przechodzą w '' - czy chodzi o to, że '' stringują wartość, a `` nie?
+    global.Date = mockDate(`2019-05-14T${time}.135Z`);
 
     const component = shallow(<HappyHourAd {...mockProps} />);
     const renderedTime = component.find(select.promoD).text();
@@ -68,7 +68,7 @@ describe('Component HappyHourAd with mocked Date', () => {
 const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
   it(`should show correct value ${delaySeconds} seconds after ${time}`, () => {
     jest.useFakeTimers();
-    global.Date = mockDate(`2019-05-14T${time}.135Z`); // mam wrażnie, że czytałam o ``, z drugiej strony w OrderOption wąsate dolary przechodzą w '' - czy chodzi o to, że '' stringują wartość, a `` nie?
+    global.Date = mockDate(`2019-05-14T${time}.135Z`);
 
     const component = shallow(<HappyHourAd {...mockProps} />);
     const newTime = new Date();
@@ -89,4 +89,11 @@ describe('Component HappyHourAd with mocked Date and delay', () => {
   checkDescriptionAfterTime('11:57:58', 2, '120');
   checkDescriptionAfterTime('11:59:58', 1, '1');
   checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
+});
+
+//test 6, którego oczywiście nie było - starsza pani ma omamy, problemy ze wzrokiem i przeprasza
+describe('Component HappyHourAd with mocked Date', () => {
+  checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
+  checkDescriptionAtTime('12:30:59', mockProps.promoDescription);
+  checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
 });

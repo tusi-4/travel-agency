@@ -1,6 +1,6 @@
 import React from 'react';
 // import styles from './HappyHourAd.scss';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 class HappyHourAd extends React.Component {
   constructor(){
@@ -11,6 +11,17 @@ class HappyHourAd extends React.Component {
     }, 1000
     );
   }
+  
+  static propTypes = {
+    title: PropTypes.string,
+    promoDescription: PropTypes.string,
+  }
+
+  static defaultProps = {
+    title: 'HAPPY HOUR',
+    promoDescription: 'Super funky blabla!',
+  }
+
   
   getCountdownTime(){
     const currentTime = new Date();
@@ -25,19 +36,14 @@ class HappyHourAd extends React.Component {
   // jeśli ktoś to sobie samodzielnie napisał, to szanuję
   
   render() {
+    const countdownTime = this.getCountdownTime();
     return (
       <div>
         <h3 className='title' title='Title'></h3>
-        <div className='promoDescription'>{this.getCountdownTime()}</div>
+        <div className="promoDescription">{(countdownTime > 23 * 60 * 60) ? this.props.promoDescription : this.getCountdownTime()}</div>
       </div>
     );
   }
 }
-
-/* komponent ma być klasowy
-const HappyHourAd = () => {
-
-};
-*/
 
 export default HappyHourAd;
