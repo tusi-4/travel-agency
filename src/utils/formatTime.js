@@ -7,7 +7,7 @@ export const formatTime = arg => {
     let mm = Math.floor((arg / 60) % 60);
     let hh = Math.floor((arg / 3600) % 60);
     
-    let sec = ss.toString().padStart(2, '0'); //wywala błąd, bo zamieniłam to w string, czy tak?
+    let sec = ss.toString().padStart(2, '0');
     let min = mm.toString().padStart(2, '0');
     let hrs = hh.toString().padStart(2, '0');
 
