@@ -18,9 +18,9 @@ class DaysToSummer extends React.Component {
 
   getInfo(){
     const today = new Date();
-    const month = new Date(Date.UTC(today.getUTCMonth()));
-    const day = new Date(Date.UTC(today.getUTCDate()));
-    const dateCode = (month + 1) + day;
+    const month = today.getUTCMonth(); //no tak, to ma więcej sensu teraz
+    const day = today.getUTCDate();
+    const dateCode = (month + 1) + '' + day; // NO PRZECIEŻ NAMBERY, A NIE STRINGI!!! DŻIZAS!!! tylko czemu to działało w pierwszej wersji :D
     let daysLeft = '';
 
     if(dateCode >= 621 && dateCode <= 923){
