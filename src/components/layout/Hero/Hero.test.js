@@ -37,7 +37,7 @@ describe('Component Hero', () => {
   
     expect(component.find('HappyHourAd').length).toEqual(1);
   });
-  /*
+
   it('should render DaysToSummer', () => {
     const expectedTitle = 'Lorem ipsum';
     const expectedImage = 'image.jpg';
@@ -45,5 +45,4 @@ describe('Component Hero', () => {
   
     expect(component.find('DaysToSummer').length).toEqual(1);
   });
-  */
 });

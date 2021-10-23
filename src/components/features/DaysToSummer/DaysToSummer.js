@@ -1,18 +1,19 @@
 import React from 'react';
+import styles from './DaysToSummer.scss';
 import PropTypes from 'prop-types';
 
 class DaysToSummer extends React.Component {
   constructor(){
     super();
 
-    // tu chcę, żeby się mieliło co dobę
     setInterval(() => {
       this.forceUpdate();
     }, 1000 * 60 * 60 * 24
     );
   }
-  
+
   static propTypes = {
+    summerInfo: PropTypes.string,
     daysInfo: PropTypes.string,
     oneDayInfo: PropTypes.string,
   }
@@ -22,37 +23,39 @@ class DaysToSummer extends React.Component {
     oneDayInfo: ' day to summer!',
   }
 
-  // tu dopasowuję info do daty
+  getCountdown(){
+    const today = new Date();
+    const summer = new Date(today.getUTCFullYear()+1, 5, 21);
+    return Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
+  }
+
   getInfo(){
-    const currentTime = new Date();
-    const month = new Date(Date.UTC(currentTime.getUTCMonth()));
-    const day = new Date(Date.UTC(currentTime.getUTCDate()));
+    const today = new Date();
+    const month = new Date(Date.UTC(today.getUTCMonth()));
+    const day = new Date(Date.UTC(today.getUTCDate()));
     const dateCode = (month + 1) + day;
 
     if(dateCode >= 621 && dateCode <= 923){
-      return null; // lato, więc nic się nie pojawia, a najlepiej jak wykminię, żeby cały div się nie renderował
+      return null;
     } else if(dateCode == 620){
-      return this.props.oneDayInfo; // jeden dzień do lata
+      return this.props.oneDayInfo;
     } else{
-      return this.props.daysInfo; // nie-lato
+      return this.props.daysInfo;
     }
   }
 
-  // tu odliczam dni
-  getCountdown(){
-    // błyskotliwa funkcja, na którą jeszcze nie mogę wpaść
-  }
-  
-  // tu sobie renderuję
   render(){
-    const info = this.getInfo();
     const countdown = this.getCountdown();
+    const info = this.getInfo();
     return(
-      <div className='component'>
-        <div className='summerInfo'>
-          {/*tu będę miała wynik obliczania i stosowne info jeśli kiedykolwiek wymyślę obliczanie i jak to połączyć */}
-          {countdown}{info}
-        </div>
+      <div className={styles.component}>
+        {info != null &&
+          <div className={styles.summerInfo}>
+            {countdown}
+            {info}
+          </div>
+        }
+
       </div>
     );
   }
