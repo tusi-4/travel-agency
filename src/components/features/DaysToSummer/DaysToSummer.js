@@ -14,19 +14,6 @@ class DaysToSummer extends React.Component {
 
   static propTypes = {
     summerInfo: PropTypes.string,
-    daysInfo: PropTypes.string,
-    oneDayInfo: PropTypes.string,
-  }
-
-  static defaultProps = {
-    daysInfo: ' days to summer!',
-    oneDayInfo: ' day to summer!',
-  }
-
-  getCountdown(){
-    const today = new Date();
-    const summer = new Date(today.getUTCFullYear()+1, 5, 21);
-    return Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
   }
 
   getInfo(){
@@ -38,24 +25,29 @@ class DaysToSummer extends React.Component {
     if(dateCode >= 621 && dateCode <= 923){
       return null;
     } else if(dateCode == 620){
-      return this.props.oneDayInfo;
+      return '1 day to summer!';
     } else{
-      return this.props.daysInfo;
+      if(dateCode < 620){
+        const summer = new Date(today.getUTCFullYear(), 5, 21);
+        const daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
+        return daysLeft + ' days to summer!';
+      } else if(dateCode > 923){
+        const summer = new Date(today.getUTCFullYear()+1, 5, 21);
+        const daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
+        return daysLeft + ' days to summer!';
+      }
     }
   }
 
   render(){
-    const countdown = this.getCountdown();
     const info = this.getInfo();
     return(
       <div className={styles.component}>
         {info != null &&
           <div className={styles.summerInfo}>
-            {countdown}
             {info}
           </div>
         }
-
       </div>
     );
   }
