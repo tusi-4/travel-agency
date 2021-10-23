@@ -21,21 +21,20 @@ class DaysToSummer extends React.Component {
     const month = new Date(Date.UTC(today.getUTCMonth()));
     const day = new Date(Date.UTC(today.getUTCDate()));
     const dateCode = (month + 1) + day;
+    let daysLeft = '';
 
     if(dateCode >= 621 && dateCode <= 923){
       return null;
     } else if(dateCode == 620){
       return '1 day to summer!';
-    } else{
-      if(dateCode < 620){
-        const summer = new Date(today.getUTCFullYear(), 5, 21);
-        const daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
-        return daysLeft + ' days to summer!';
-      } else if(dateCode > 923){
-        const summer = new Date(today.getUTCFullYear()+1, 5, 21);
-        const daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
-        return daysLeft + ' days to summer!';
-      }
+    } else if(dateCode < 620){
+      const summer = new Date(today.getUTCFullYear(), 5, 21);
+      daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
+      return daysLeft + ' days to summer!';
+    } else if(dateCode > 923){
+      const summer = new Date(today.getUTCFullYear()+1, 5, 21);
+      daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
+      return daysLeft + ' days to summer!';
     }
   }
 
