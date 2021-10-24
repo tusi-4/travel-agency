@@ -18,23 +18,23 @@ class DaysToSummer extends React.Component {
 
   getInfo(){
     const today = new Date();
-    const month = today.getUTCMonth(); //no tak, to ma więcej sensu teraz
+    const month = today.getUTCMonth();
     const day = today.getUTCDate();
-    const dateCode = (month + 1) + '' + day; // NO PRZECIEŻ NAMBERY, A NIE STRINGI!!! DŻIZAS!!! tylko czemu to działało w pierwszej wersji :D
+    const dateCode = (month + 1) + '' + day;
     let daysLeft = '';
 
     if(dateCode >= 621 && dateCode <= 923){
       return null;
     } else if(dateCode == 620){
-      return '1 day to summer!';
+      return '1';
     } else if(dateCode < 620){
       const summer = new Date(today.getUTCFullYear(), 5, 21);
       daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
-      return daysLeft + ' days to summer!';
+      return daysLeft.toString();
     } else if(dateCode > 923){
       const summer = new Date(today.getUTCFullYear()+1, 5, 21);
       daysLeft = Math.round(Math.abs((today.getTime() - summer.getTime()) / (1000 * 60 * 60 * 24)));
-      return daysLeft + ' days to summer!';
+      return daysLeft.toString();
     }
   }
 
@@ -44,7 +44,7 @@ class DaysToSummer extends React.Component {
       <div className={styles.component}>
         {info != null &&
           <div className={styles.summerInfo}>
-            {info}
+            {info == 1 ? info + ' day to summer!' : info + ' days to summer!'}
           </div>
         }
       </div>
