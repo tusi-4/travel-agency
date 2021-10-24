@@ -20,9 +20,8 @@ describe('Component DaysToSummer', () => {
   });
 });
 
-const today = Date; // jeszcze nie wiem gdzie użyć
-//mockuję miesiąc
-const mockMonth = customDate => class extends Date {
+const trueDate = Date;
+const mockDate = customDate => class extends Date {
   constructor(...args) {
     if(args.length){
       super(...args);
@@ -32,42 +31,27 @@ const mockMonth = customDate => class extends Date {
     return this;
   }
   static now(){
-    return (new Date(customDate)).getMonth();
-  }
-};
-// mockuję dzień
-const mockDay = customDate => class extends Date {
-  constructor(...args) {
-    if(args.length){
-      super(...args);
-    } else {
-      super(customDate);
-    }
-    return this;
-  }
-  static now(){
-    return (new Date(customDate)).getDate();
+    return (new Date(customDate)).getTime();
   }
 };
 
-// ZACZYNA SIĘ BEZSENS (KIERUNEK MYŚLENIA JEST OD DOŁU DO GÓRY)
-// funkcja biorąca dateCode, który powstaje z połączenia mockowanych miesiąca i dnia i oczekiwanego info
-const checkInfoAtDate= (dateCode, expectedInfo) => {
-  // przygotowuję dateCode
-  const dateCode = (mockMonth(`${month}`) + 1) + '' + mockDay(`${day}`);
-  // tu sama nie wiem co chcę
-  const component = shallow(<DaysToSummer />);
-  const renderedDateCode = compo
+const checkInfoAtDate = (date, expectedInfo) => {
+  it(`should show correct at ${date}`, () => {
+    global.Date = mockDate(`${date}`);
+
+    const component = shallow(<DaysToSummer />);
+    const renderedDate = component.find(select.summerInfo).text();
+    expect(renderedDate).toEqual(expectedInfo);
+
+    global.Date = trueDate;
+  });
 };
 
-// a tu już pięknie wszystko czeka na mielenie
-describe('Component DaysToSummer with mockedDate and summer Info', () => {
-  checkInfoAtDate(101, '171 days to summer!');
-  checkInfoAtDate(517, '35 days to summer!');
-  checkInfoAtDate(620, '1 day to summer!');
-  checkInfoAtDate(621, ''); // a może raczej tu powinien być null zamiast ''?
-  checkInfoAtDate(923, '');
-  checkInfoAtDate(1024, '240 days to summer!');
-  checkInfoAtDate(1231, '172 days to summer!');
+describe('Component DaysToSummer with mocked Date and summer Info', () => {
+  checkInfoAtDate('2021-09-24', '270 days to summer!');
+  checkInfoAtDate('2021-12-31', '172 days to summer!');
+  checkInfoAtDate('2022-01-02', '170 days to summer!');
+  checkInfoAtDate('2022-05-17', '35 days to summer!');
+  checkInfoAtDate('2022-06-20', '1 day to summer!');
+
 });
-// PS. Tak, z jakiegoś powodu chcę wszędzie wpychać dateCode
